@@ -24,7 +24,7 @@ $(document).ready(function(){
 				var $xml = $(data);
 				console.log($xml);
 				var emails = new Array();
-				var $emails = $xml.find("gd:email");
+				var $emails = $xml.find("email");
 				$emails.each(function(){
 					emails.push($(this).attr("address"));
 				});
