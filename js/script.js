@@ -26,8 +26,14 @@ $(document).ready(function(){
 				var emails = new Array();
 				var $emails = $xml.find("email");
 				$emails.each(function(){
-					emails.push($(this).attr("address"));
+					var email = $(this).attr("address");
+					$.getJSON("http://api.rainmaker.cc/v1/person.json?email=" + email + "&apiKey=aa676803302af5e2&timeoutSeconds=30", function(data){
+						if(photos in data && data.photos.length > 0 && contactInfo in data && fullName in data.contactInfo){
+							matches.add(new Match(data.contactInfo.fullName, data.photos[0].url))
+						}
+					});
 				});
+				setTimeout(play, 5000);
 				localStorage["emails"] = JSON.stringify(emails);
 			}
 		}
