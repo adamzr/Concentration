@@ -37,6 +37,9 @@ $(document).ready(function(){
 		matches = JSON.parse(localStorage['matches']);
 		play();
 	}
+	else{
+		play();
+	}
 	
 	function play(){
 		if(matches.length < 16){
