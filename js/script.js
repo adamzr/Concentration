@@ -19,7 +19,7 @@ $(document).ready(function(){
 		$.ajax("https://www.google.com/m8/feeds/contacts/default/full?oauth_token=" + token,
 		{
 			cache: false,
-			dataType: "xml",
+			dataType: "jsonp xml",
 			success: function(data, textStatus, jqXHR){
 				var $xml = $(data);
 				console.log($xml);
