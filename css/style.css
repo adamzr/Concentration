@@ -158,7 +158,7 @@ a:link { -webkit-tap-highlight-color: #FF5E99; } /* j.mp/webkit-tap-highlight-co
  * Author: Adam Richeimer
  */
 
- body{
+ html body{
 	background-color: beige;
  }
  
@@ -195,10 +195,33 @@ a:link { -webkit-tap-highlight-color: #FF5E99; } /* j.mp/webkit-tap-highlight-co
 }
 
 .card .back {
-  background: blue;
+  background: grey;
   -webkit-transform: rotateY( 180deg );
   -webkit-border-radius: 30px;
   border-radius: 30px; /* future proofing */
+  display: block;
+  border: 15px 15px;
+}
+
+.card .back img{
+    margin-top: 15px;
+	display: table-cell;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+	max-height: 110px;
+	vertical-align: middle;
+}
+
+.card .back p{
+    padding-top: 62px;
+	margin-bottom: auto;
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
 }
 
 .card.flipped {
