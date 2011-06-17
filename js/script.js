@@ -16,7 +16,7 @@ $(document).ready(function(){
 	
 	if(window.location.hash.indexOf("access_token") > 0){
 		var token = window.location.hash.split("access_token=")[1].split("&")[0];
-		$.ajax("https://www.google.com/m8/feeds/contacts/default/full?oauth_token=1/QbIbRMWW",
+		$.ajax("https://www.google.com/m8/feeds/contacts/default/full?oauth_token=" + token,
 		{
 			cache: false,
 			dataType: "xml",
