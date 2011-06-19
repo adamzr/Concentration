@@ -48,7 +48,7 @@ $(document).ready(function(){
 				$emails.each(function(){
 					var email = $(this).attr("address");//extract the emai address
 					//Get photos for the email address from RainMaker
-					$.getJSON("http://api.rainmaker.cc/v1/person.json?email=" + email + "&apiKey=aa676803302af5e2&timeoutSeconds=30callback=?", function(data){
+					$.getJSON("http://api.rainmaker.cc/v1/person.json?email=" + email + "&apiKey=aa676803302af5e2&timeoutSeconds=30&callback=?", function(data){
 						//If we have a name and a photo we're good to go
 						if(photos in data && data.photos.length > 0 && contactInfo in data && fullName in data.contactInfo){
 							//Choose the photo to match with the face randomly from available photos
