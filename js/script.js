@@ -13,8 +13,8 @@ shuffle = function(v){
  
 GAME.COLS = 8;
 GAME.ROWS = 4;
-GAME.CARDS = ROWS * COLS;
-GAME.MATCHES = CARDS / 2;
+GAME.CARDS = GAME.ROWS * GAME.COLS;
+GAME.MATCHES = GAME.CARDS / 2;
 GAME.started = false;
 //When the document is ready start the game
 $(document).ready(function(){
