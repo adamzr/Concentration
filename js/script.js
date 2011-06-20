@@ -85,7 +85,7 @@ $(document).ready(function(){
 					}
 					console.log("Waiting on " + (requestsMade - requestsCompleted) + " checks.");
 					checksMade++;
-					setTimeOut(waitUntilComplete, 1000);
+					setTimeout(waitUntilComplete, 1000);
 				}
 				waitUntilComplete();
             }
