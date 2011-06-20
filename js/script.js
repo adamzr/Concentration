@@ -67,9 +67,9 @@ $(document).ready(function(){
 						},
 						success: function(data){
 							//If we have a name and a photo we're good to go
-							if(photos in data && data.photos.length > 0 && contactInfo in data && fullName in data.contactInfo){
+							if("photos" in data && data.photos.length > 0 && "contactInfo" in data && "fullName" in data.contactInfo){
 								//Choose the photo to match with the face randomly from available photos
-								matches.add(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
+								matches.push(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
 							}
 						}	
 					});
