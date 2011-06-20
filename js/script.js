@@ -65,13 +65,19 @@ $(document).ready(function(){
 						error: function(jqXHR, textStatus, errorThrown){
 							console.log(textStatus + ":" + errorThrown);
 						},
-						success: function(data){
+						success: function(data, textStatus, jqXHR){
 							//If we have a name and a photo we're good to go
 							if("photos" in data && data.photos.length > 0 && "contactInfo" in data && "fullName" in data.contactInfo){
 								//Choose the photo to match with the face randomly from available photos
 								matches.push(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
 							}
-						}	
+						},
+						statusCode: {
+							404: function(jqXHR, textStatus, errorThrown){
+								console.log(email + " was searched in the past 24 hours and nothing was found.");
+								requestsCompleted++;
+							}
+						}
 					});
 					requestsMade++;
 				});
@@ -82,6 +88,7 @@ $(document).ready(function(){
 					if(requestsMade === requestsCompleted || checksMade === maxChecks){
 						localStorage["matches"] = JSON.stringify(matches);//Save them for next time
 						play();
+						return;
 					}
 					console.log("Waiting on " + (requestsMade - requestsCompleted) + " checks.");
 					checksMade++;
