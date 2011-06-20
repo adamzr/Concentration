@@ -42,8 +42,8 @@ $(document).ready(function(){
             dataType: "jsonp xml",//the results are in JSON padded XML
             success: function(data, textStatus, jqXHR){
                 var $xml = $(data);//Create a jQuery XML document of results to search within
-                console.log($xml);
-                
+                var $emails = $xml.find("email");//find all the email address elements
+				
 				var requestsMade = 0;
 				var requestsCompleted = 0;
 				$emails.each(function(){
