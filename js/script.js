@@ -45,19 +45,51 @@ $(document).ready(function(){
 				console.log($xml);
 				
 				var $emails = $xml.find("email");//find all the email address elements
+				var requestsMade = 0;
+				var requestsCompleted = 0;
 				$emails.each(function(){
 					var email = $(this).attr("address");//extract the emai address
 					//Get photos for the email address from RainMaker
-					$.getJSON("http://api.rainmaker.cc/v1/person.json?email=" + email + "&apiKey=aa676803302af5e2&timeoutSeconds=30callback=?", function(data){
-						//If we have a name and a photo we're good to go
-						if(photos in data && data.photos.length > 0 && contactInfo in data && fullName in data.contactInfo){
-							//Choose the photo to match with the face randomly from available photos
-							matches.add(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
-						}
+						
+					$.ajax({
+						url: "http://api.rainmaker.cc/v1/person.json",
+						cache: false,
+						complete: function(jqXHR, textStatus){
+							requestsCompleted++;
+						},
+						data: {
+							email: email,
+							apiKey: "aa676803302af5e2",
+							timeoutSeconds: 30
+						},
+						dataType: "jsonp",
+						error: function(jqXHR, textStatus, errorThrown){
+							console.log(textStatus + ":" + errorThrown);
+						},
+						success: function(data){
+							//If we have a name and a photo we're good to go
+							if(photos in data && data.photos.length > 0 && contactInfo in data && fullName in data.contactInfo){
+								//Choose the photo to match with the face randomly from available photos
+								matches.add(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
+							}
+						}	
 					});
+					requestsMade++;
 				});
-				setTimeout(play, 5000);//Wait 5 seconds after the last request to leave time for RainMaker to respond to all the queries
-				localStorage["matches"] = JSON.stringify(matches);//Save them for next time
+				
+				var checksMade = 0;
+				var maxChecks = 30;
+				function waitUntilComplete(){
+					if(requestsMade === requestsCompleted || checksMade === maxChecks){
+						localStorage["matches"] = JSON.stringify(matches);//Save them for next time
+						play();
+					}
+					console.log("Waiting on " + (requestsMade - requestsCompleted) + " checks.");
+					checksMade++;
+					setTimeOut(waitUntilComplete, 1000);
+				}
+				waitUntilComplete();
+				
 			}
 		}
 		);
