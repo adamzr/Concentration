@@ -114,22 +114,22 @@ $(document).ready(function(){
         //If there's not enough matches we'll need to use the default cards
         if(matches.length < GAME.MATCHES){
             defaultMatches = new Array();
-            defaultMatches.push(new Match("George Washington", "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/100px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg"));
-            defaultMatches.push(new Match("John Adams", "http://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Adamstrumbull.jpg/100px-Adamstrumbull.jpg"));
-            defaultMatches.push(new Match("Thomas Jefferson", "http://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg/100px-Thomas_Jefferson_by_Rembrandt_Peale%2C_1800.jpg"));
-            defaultMatches.push(new Match("James Madison", "http://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/James_Madison.jpg/100px-James_Madison.jpg"));
-            defaultMatches.push(new Match("James Monroe", "http://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Jm5.gif/100px-Jm5.gif"));
-            defaultMatches.push(new Match("John Quincy Adams", "http://upload.wikimedia.org/wikipedia/commons/thumb/2/25/John_Quincy_Adams_by_GPA_Healy%2C_1858.jpg/100px-John_Quincy_Adams_by_GPA_Healy%2C_1858.jpg"));
-            defaultMatches.push(new Match("Andrew Jackson", "http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Andrew_jackson_head.jpg/100px-Andrew_jackson_head.jpg"));
-            defaultMatches.push(new Match("Martin Van Buren", "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Mb8.gif/100px-Mb8.gif"));
-            defaultMatches.push(new Match("William Henry Harrison", "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/William_Henry_Harrison_by_James_Reid_Lambdin%2C_1835.jpg/100px-William_Henry_Harrison_by_James_Reid_Lambdin%2C_1835.jpg"));
-            defaultMatches.push(new Match("John Tyler", "http://upload.wikimedia.org/wikipedia/commons/thumb/0/00/WHOportTyler.jpg/100px-WHOportTyler.jpg"));
-            defaultMatches.push(new Match("James K. Polk", "http://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/James_Knox_Polk_by_GPA_Healy%2C_1858.jpg/100px-James_Knox_Polk_by_GPA_Healy%2C_1858.jpg"));
-            defaultMatches.push(new Match("Zachary Taylor", "http://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Zachary_Taylor_2.jpg/100px-Zachary_Taylor_2.jpg"));
-            defaultMatches.push(new Match("Millard Fillmore", "http://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Millard_Fillmore_by_George_PA_Healy%2C_1857.jpg/100px-Millard_Fillmore_by_George_PA_Healy%2C_1857.jpg"));
-            defaultMatches.push(new Match("Franklin Pierce", "http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Franklin_Pierce_by_GPA_Healy%2C_1858.jpg/100px-Franklin_Pierce_by_GPA_Healy%2C_1858.jpg"));
-            defaultMatches.push(new Match("James Buchanan", "http://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/JamesBuchanan-small.png/100px-JamesBuchanan-small.png"));
-            defaultMatches.push(new Match("Abraham Lincoln", "http://upload.wikimedia.org/wikipedia/commons/thumb/5/54/AbrahamLincolnOilPainting1869Restored.jpg/100px-AbrahamLincolnOilPainting1869Restored.jpg"));
+            defaultMatches.push(new Match("Barack Obama", "http://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Official_portrait_of_Barack_Obama.jpg/100px-Official_portrait_of_Barack_Obama.jpg"));
+            defaultMatches.push(new Match("George W. Bush", "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/George-W-Bush.jpeg/100px-George-W-Bush.jpeg"));
+            defaultMatches.push(new Match("Bill Clinton", "http://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Clinton.jpg/100px-Clinton.jpg"));
+            defaultMatches.push(new Match("George H. W. Bush", "http://upload.wikimedia.org/wikipedia/commons/thumb/1/10/George_H._W._Bush_-_portrait_by_Herbert_Abrams_%281994%29.jpg/100px-George_H._W._Bush_-_portrait_by_Herbert_Abrams_%281994%29.jpg"));
+            defaultMatches.push(new Match("Ronald Reagan", "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/REAGANWH.jpg/100px-REAGANWH.jpg"));
+            defaultMatches.push(new Match("Jimmy Carter", "http://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/James_E._Carter_-_portrait.gif/99px-James_E._Carter_-_portrait.gif"));
+            defaultMatches.push(new Match("Gerald Ford", "http://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gerald_R._Ford_-_portrait.jpg/100px-Gerald_R._Ford_-_portrait.jpg"));
+            defaultMatches.push(new Match("Richard Nixon", "http://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Richard_Nixon_-_Presidential_portrait.jpg/100px-Richard_Nixon_-_Presidential_portrait.jpg"));
+            defaultMatches.push(new Match("Lyndon B. Johnson", "http://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Lyndon_B._Johnson_-_portrait.png/100px-Lyndon_B._Johnson_-_portrait.png"));
+            defaultMatches.push(new Match("John F. Kennedy", "http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/John_F_Kennedy_Official_Portrait.jpg/100px-John_F_Kennedy_Official_Portrait.jpg"));
+            defaultMatches.push(new Match("Dwight D. Eisenhower", "http://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Dwight_D._Eisenhower%2C_official_Presidential_portrait.jpg/100px-Dwight_D._Eisenhower%2C_official_Presidential_portrait.jpg"));
+            defaultMatches.push(new Match("Harry S. Truman", "http://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/HarryTruman.jpg/100px-HarryTruman.jpg"));
+            defaultMatches.push(new Match("Franklin D. Roosevelt", "http://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Franklin_Roosevelt_-_Presidential_portrait.jpg/100px-Franklin_Roosevelt_-_Presidential_portrait.jpg"));
+            defaultMatches.push(new Match("Herbert Hoover", "http://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Herbert_Clark_Hoover_by_Greene%2C_1956.jpg/100px-Herbert_Clark_Hoover_by_Greene%2C_1956.jpg"));
+            defaultMatches.push(new Match("Calvin Coolidge", "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Calvin_Coolidge.jpg/100px-Calvin_Coolidge.jpg"));
+            defaultMatches.push(new Match("Warren G. Harding", "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Wh29.gif/100px-Wh29.gif"));
             //We should use only as many default cards as needed
             while(matches.length < GAME.MATCHES){
                 matches.push(defaultMatches.shift());

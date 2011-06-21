@@ -228,6 +228,37 @@ a:link { -webkit-tap-highlight-color: #FF5E99; } /* j.mp/webkit-tap-highlight-co
   -webkit-transform: rotateY( 180deg );
 }
 
+.button {
+   border-top: 1px solid #92ff03;
+   background: #99660e;
+   background: -webkit-gradient(linear, left top, left bottom, from(#b0d646), to(#99660e));
+   background: -moz-linear-gradient(top, #b0d646, #99660e);
+   padding: 10.5px 21px;
+   -webkit-border-radius: 28px;
+   -moz-border-radius: 28px;
+   border-radius: 28px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 21px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+   
+.button:hover {
+   border-top-color: #524306;
+   background: #524306;
+   color: #ccc;
+   }
+   
+.button:active {
+   border-top-color: #0a0a03;
+   background: #0a0a03;
+   }
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
