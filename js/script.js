@@ -71,12 +71,6 @@ $(document).ready(function(){
 								//Choose the photo to match with the face randomly from available photos
 								matches.push(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
 							}
-						},
-						statusCode: {
-							404: function(jqXHR, textStatus, errorThrown){
-								console.log(email + " was searched in the past 24 hours and nothing was found.");
-								requestsCompleted++;
-							}
 						}
 					});
 					requestsMade++;
