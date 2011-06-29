@@ -50,7 +50,7 @@ $(document).ready(function(){
 					var email = $(this).attr("address");//extract the emai address
 					//Get photos for the email address from RainMaker
 					
-          if(email.trim().length < 1){
+          if(email && email.trim().length < 1){
             //If there's no email address just skip it
             return;
           }
