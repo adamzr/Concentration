@@ -208,8 +208,10 @@ $(document).ready(function(){
                           $(this).remove();
                           if($(".card").length === 0){
                             clearInterval(GAME.timerInteval);
-                            $("#seconds").text( Math.max(parseInt($("#seconds").text()) - 3, 0) );
-                            $("#main").html("<h1 class='prepend-8 span-6 append-8 last'>You Won!</h1><br /><a href='javascript:location.reload()'>Play again?</a>");
+                            var seconds = Math.max(parseInt($("#seconds").text()) - 3, 0);
+                            $("#seconds").text( seconds );
+                            $("#main").html("<div id='winmessage'><h1>You Won in " + seconds + " seconds!</h1><br /><a href='javascript:location.reload()'>Play again?</a></div>");
+                            $("#winmessage").center();
                           }
                         }
                         );
