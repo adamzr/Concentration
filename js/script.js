@@ -157,7 +157,7 @@ $(document).ready(function(){
             var $card1 = $(".card").eq(cards[j]);
             var $card2 = $(".card").eq(cards[j + 1]);
             //If the image source is a valid URL use the face image, otherwise use just the name
-            if(match.imgSrc.length.trim().length > 0){
+            if(match.imgSrc.trim().length > 0){
               $card1.find(".back").append("<span></span><img class='face' src='" + match.imgSrc + "' id='face" + i +"'></img>");
             }
             else{
