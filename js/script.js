@@ -156,10 +156,15 @@ $(document).ready(function(){
             $card2.data("name", match.name);
         }
         
+        function timer(){
+          $("#seconds").text(parseInt($("#seconds").text()) + 1);
+        }
+        
         //Handle clicks on cards
         $(".card").click(function(){
             if(!GAME.started){
                 GAME.started = true;
+                GAME.timerInteval = setInterval(timer, 1000);
             }
             if( $(this).hasClass("flipped")){
                 //If you turn over one you already turned over, all get turned back over
@@ -178,6 +183,10 @@ $(document).ready(function(){
                         $(".flipped").fadeOut(3000, function(){$(this).remove()});
                     }
                 }
+            }
+            if($(".card").length === 0){
+              clearInterval(GAME.timerInteval);
+              $(document.body).append("<h1>You Won!</h1><br /><a href='javascript:location.reload()'>Play again?</a>");
             }
         });
         
