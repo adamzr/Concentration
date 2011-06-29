@@ -16,6 +16,14 @@ GAME.ROWS = 4;
 GAME.CARDS = GAME.ROWS * GAME.COLS;
 GAME.MATCHES = GAME.CARDS / 2;
 GAME.started = false;
+
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
+    this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+    return this;
+}
+
 //When the document is ready start the game
 $(document).ready(function(){
     //Block the UI while we build the game 

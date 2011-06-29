@@ -295,6 +295,10 @@ a:link { -webkit-tap-highlight-color: #FF5E99; } /* j.mp/webkit-tap-highlight-co
   text-align: center;
 }
 
+#winmessage {
+  text-align: center;
+}
+
 /**
  * Non-semantic helper classes: please define your styles before this section.
  */
