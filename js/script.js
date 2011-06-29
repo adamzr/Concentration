@@ -49,7 +49,12 @@ $(document).ready(function(){
 				$emails.each(function(){
 					var email = $(this).attr("address");//extract the emai address
 					//Get photos for the email address from RainMaker
-						
+					
+          if(email.trim().length < 1){
+            //If there's no email address just skip it
+            return;
+          }
+          
 					$.ajax({
 						url: "http://api.rainmaker.cc/v1/person.json",
 						cache: false,
@@ -204,7 +209,7 @@ $(document).ready(function(){
                           if($(".card").length === 0){
                             clearInterval(GAME.timerInteval);
                             $("#seconds").text( Math.max(parseInt($("#seconds").text()) - 3, 0) );
-                            $(document.body).append("<h1>You Won!</h1><br /><a href='javascript:location.reload()'>Play again?</a>");
+                            $("#main").html("<h1 class='prepend-8 span-6 append-8 last'>You Won!</h1><br /><a href='javascript:location.reload()'>Play again?</a>");
                           }
                         }
                         );
