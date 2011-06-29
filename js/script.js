@@ -68,8 +68,18 @@ $(document).ready(function(){
 						success: function(data, textStatus, jqXHR){
 							//If we have a name and a photo we're good to go
 							if("photos" in data && data.photos.length > 0 && "contactInfo" in data && "fullName" in data.contactInfo){
-								//Choose the photo to match with the face randomly from available photos
-								matches.push(new Match(data.contactInfo.fullName, data.photos[Math.floor(Math.random() * data.photos.length)].url));
+								//Remove empty URLs
+                var photos = $.map(data.photos, function(photo, index){
+                  if(photo.url.trim().length > 0){
+                    return photo;
+                  }
+                  else{
+                    return null;
+                  }
+                });
+                
+                //Choose the photo to match with the face randomly from available photos
+								matches.push(new Match(data.contactInfo.fullName, photos[Math.floor(Math.random() * photos.length)].url));
 							}
 						}
 					});
@@ -146,11 +156,14 @@ $(document).ready(function(){
             var match = matches[i];
             var $card1 = $(".card").eq(cards[j]);
             var $card2 = $(".card").eq(cards[j + 1]);
-            $card1.find(".back").append("<span></span><img class='face' src='" + match.imgSrc + "' id='face" + i +"'></img>");
-            //If the image doesn't load use the name instead of the face
-            $("#face" + i).error(function(){
-                $("#face" + i).replaceWith("<p>" + match.name + "</p>");
-            });
+            //If the image source is a valid URL use the face image, otherwise use just the name
+            if(match.imgSrc.length.trim().length > 0){
+              $card1.find(".back").append("<span></span><img class='face' src='" + match.imgSrc + "' id='face" + i +"'></img>");
+            }
+            else{
+              $card1.find(".back").append("<p>" + match.name + "</p>");
+            }
+            
             $card2.find(".back").append("<p>" + match.name + "</p>");
             $card1.data("name", match.name);
             $card2.data("name", match.name);
@@ -159,6 +172,11 @@ $(document).ready(function(){
         function timer(){
           $("#seconds").text(parseInt($("#seconds").text()) + 1);
         }
+        
+        //If the image doesn't load use the name instead of the face
+        $(".face").live("error", function(){
+          $(this).replaceWith("<p>" + $(this).parent(".card").data("name") + "</p>");
+         });
         
         //Handle clicks on cards
         $(".card").click(function(){
@@ -180,14 +198,20 @@ $(document).ready(function(){
                 
                 if(flippedOver === 1){
                     if($(".flipped").eq(0).data("name") === $(".flipped").eq(1).data("name")){
-                        $(".flipped").fadeOut(3000, function(){$(this).remove()});
+                        $(".flipped").fadeOut(3000,
+                        function(){
+                          $(this).remove();
+                          if($(".card").length === 0){
+                            clearInterval(GAME.timerInteval);
+                            $("#seconds").text( Math.max(parseInt($("#seconds").text()) - 3, 0) );
+                            $(document.body).append("<h1>You Won!</h1><br /><a href='javascript:location.reload()'>Play again?</a>");
+                          }
+                        }
+                        );
                     }
                 }
             }
-            if($(".card").length === 0){
-              clearInterval(GAME.timerInteval);
-              $(document.body).append("<h1>You Won!</h1><br /><a href='javascript:location.reload()'>Play again?</a>");
-            }
+            
         });
         
         $.unblockUI();
