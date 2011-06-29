@@ -260,11 +260,6 @@ a:link { -webkit-tap-highlight-color: #FF5E99; } /* j.mp/webkit-tap-highlight-co
    }
    
 .css3button {
-  margin-top: 15px;
-  left: auto;
-  right: auto;
-  text-align: center;
-  
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	color: #050505;
