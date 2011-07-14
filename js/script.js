@@ -116,6 +116,32 @@ $(document).ready(function(){
         }
         );
     }
+    
+    //If we got authorization for Google Contacts use it
+    if(window.location.hash.indexOf("facebook") > 0){
+        //Load Facebook JS SDK
+        window.fbAsyncInit = function() {
+        FB.init({appId: '234115633277720', status: true, cookie: true,
+                 xfbml: true});
+        var access_token = JSON.parse(FB.getLoginStatus()).session.access_token;
+        FB.api('/me/friends', function(response) {
+          var friends = JSON.parse(response).data;
+          $.each(friends, function(index, value){
+            matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token));
+          });
+        });
+        localStorage["matches"] = JSON.stringify(matches);//Save them for next time
+        play();
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+         
+    }
+    
     //If we didn't come here from Google Contact maybe we have them saved from last time
     else if(localStorage['matches']){
         matches = JSON.parse(localStorage['matches']);

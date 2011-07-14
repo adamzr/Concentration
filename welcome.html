@@ -1,9 +1,9 @@
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
 
@@ -46,14 +46,33 @@
     <header>
         <h1 id="title">Concentration</h1>
     </header>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({appId: '234115633277720', status: true, cookie: true,
+                 xfbml: true});
+        FB.Event.subscribe('auth.login', function(response) {
+          window.location = "http://adamrich.name/Concentration/play.html#facebook"
+        });
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
     <div id="main" role="main" class="container">
-        This is the classic game of <a href="http://en.wikipedia.org/wiki/Concentration_(game)">Concentration aka Memory</a>. You have to match people's faces to their names. When you click the Play button you will be asked to authorize Google Contacts to allow us to view your contacts. For your privacy and security these contacts are never sent to our servers, they are only stored on your computer. We use them to populate the deck with the names and faces of your friends using <a href="http://rainmaker.cc/">RainMaker</a>. These pictures are taken from their public profile pictures on social networks and may not neceasrily be of their faces. If it doesn't get all the faces of your friends be sure to try again later to see if RainMaker was able to find more pictures. Good luck!
+        This is the classic game of <a href="http://en.wikipedia.org/wiki/Concentration_(game)">Concentration aka Memory</a>. You have to match people's faces to their names. Start the game by clicking on a card to turn it over. Only two cards can be flipped over at a time. If the flipped over cards match they will disappear. The goal is to make the cards disappear as fast as possible.
+        <br />
+        There are two options of whose names and faces to use on the deck of cards. You can choose your contacts on Google Contacts or your friends on Facebook. If there are not enough people available on those sources the remainder of the cards will be of recent US Presidents.<br /> If you click the "Play with Google Contacts + Rainmaker.cc!" button you will be asked to authorize Google Contacts to allow us to view your contacts. If you click "Play with Facebook!" you will be asked to allow us to get your friends Facebook information. <br />For your privacy and security these contacts are never sent to our servers, they are only stored on your computer. <br /> These pictures are taken from their public profile pictures on social networks and may not neceasrily be of their faces. If you use Google Contacts and we don't get all the faces of your friends be sure to try again later to see if RainMaker was able to find more pictures.<br /> Good luck!
         <br />
         <br />
         <br />
         <br />
-        <a href="https://accounts.google.com/o/oauth2/auth?client_id=474970412294.apps.googleusercontent.com&redirect_uri=http://adamrich.name/Concentration/play.html&scope=https://www.google.com/m8/feeds/&response_type=token" class="css3button append-11 span-2 prepend-11 last">Play!</a>
+        <a href="https://accounts.google.com/o/oauth2/auth?client_id=474970412294.apps.googleusercontent.com&redirect_uri=http://adamrich.name/Concentration/play.html&scope=https://www.google.com/m8/feeds/&response_type=token" class="css3button append-11 span-2 prepend-11 last">Play with Google Contacts + Rainmaker.cc!</a>
         <br />
+        <fb:login-button>Play with Facebook!</fb:login-button>
         <br />
         <br />
         <br />
