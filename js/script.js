@@ -125,7 +125,7 @@ $(document).ready(function(){
         var access_token = FB.getSession().access_token;
         FB.api('/me/friends', function(response) {
           $.each(response.data, function(index, value){
-            matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token));
+            matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
           });
           localStorage["matches"] = JSON.stringify(matches);//Save them for next time
           play();
