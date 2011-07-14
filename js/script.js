@@ -132,8 +132,7 @@ $(document).ready(function(){
           }
         });
         FB.api('/me/friends', function(response) {
-          var friends = JSON.parse(response).data;
-          $.each(friends, function(index, value){
+          $.each(response.data, function(index, value){
             matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token));
           });
         });
