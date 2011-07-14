@@ -248,7 +248,7 @@ $(document).ready(function(){
     }
     
     //If we got authorization for Facebook use it
-    if(window.location.hash.indexOf("facebook") > 0){
+    else if(window.location.hash.indexOf("facebook") > 0){
         //Load Facebook JS SDK
         window.fbAsyncInit = function() {
         FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
@@ -268,6 +268,11 @@ $(document).ready(function(){
         document.getElementById('fb-root').appendChild(e);
       }());
          
+    }
+    
+    //If we got authorization for LinkedIn wait to see if the LinkedIn event handlers will start the game for us
+    else if(window.location.hash.indexOf("linkedin") > 0){
+        //For now do nothing
     }
     
     //If we didn't come here from Google Contact maybe we have them saved from last time
