@@ -14,8 +14,11 @@ shuffle = function(v){
 GAME.COLS = 8;
 GAME.ROWS = 4;
 GAME.CARDS = GAME.ROWS * GAME.COLS;
-GAME.MATCHES = GAME.CARDS / 2;
+GAME.NUMBER_OF_MATCHES = GAME.CARDS / 2;
 GAME.started = false;
+
+//The list of all the matches
+GAME.matches = new Array();
 
 jQuery.fn.center = function () {
     this.css("position","absolute");
@@ -24,19 +27,27 @@ jQuery.fn.center = function () {
     return this;
 }
 
+//A match, i.e. a pair of cards
+function Match(name, imgSrc){
+    this.name = name;
+    this.imgSrc = imgSrc;
+}
+
+function onLinkedInLoad() {
+  IN.Event.on(IN, "auth", onLinkedInAuth);
+}
+function onLinkedInAuth() {
+  IN.API.Connections("me").result(createInMatches)
+}
+
+function createInMatches(connections){
+  console.log(connections);
+}
+
 //When the document is ready start the game
 $(document).ready(function(){
     //Block the UI while we build the game 
     $.blockUI({ message: '<h1>Game loading. Just a minute...</h1>' });
-    
-    //A match, i.e. a pair of cards
-    function Match(name, imgSrc){
-        this.name = name;
-        this.imgSrc = imgSrc;
-    }
-    
-    //The list of all the matches
-    var matches = new Array();
     
     //If we got authorization for Google Contacts use it
     if(window.location.hash.indexOf("access_token") > 0){
@@ -92,7 +103,7 @@ $(document).ready(function(){
                 });
                 
                 //Choose the photo to match with the face randomly from available photos
-								matches.push(new Match(data.contactInfo.fullName, photos[Math.floor(Math.random() * photos.length)].url));
+								GAME.matches.push(new Match(data.contactInfo.fullName, photos[Math.floor(Math.random() * photos.length)].url));
 							}
 						}
 					});
@@ -103,7 +114,7 @@ $(document).ready(function(){
 				var maxChecks = 30;
 				function waitUntilComplete(){
 					if(requestsMade === requestsCompleted || checksMade === maxChecks){
-						localStorage["matches"] = JSON.stringify(matches);//Save them for next time
+						localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
 						play();
 						return;
 					}
@@ -117,7 +128,7 @@ $(document).ready(function(){
         );
     }
     
-    //If we got authorization for Google Contacts use it
+    //If we got authorization for Facebook use it
     if(window.location.hash.indexOf("facebook") > 0){
         //Load Facebook JS SDK
         window.fbAsyncInit = function() {
@@ -125,9 +136,9 @@ $(document).ready(function(){
         var access_token = FB.getSession().access_token;
         FB.api('/me/friends', function(response) {
           $.each(response.data, function(index, value){
-            matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
+            GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
           });
-          localStorage["matches"] = JSON.stringify(matches);//Save them for next time
+          localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
           play();
         });
       };
@@ -142,7 +153,7 @@ $(document).ready(function(){
     
     //If we didn't come here from Google Contact maybe we have them saved from last time
     else if(localStorage['matches']){
-        matches = JSON.parse(localStorage['matches']);
+        GAME.matches = JSON.parse(localStorage['matches']);
         play();
     }
     //If not we can still use the default cards
@@ -153,7 +164,7 @@ $(document).ready(function(){
     //Start the game!
     function play(){
         //If there's not enough matches we'll need to use the default cards
-        if(matches.length < GAME.MATCHES){
+        if(GAME.matches.length < GAME.NUMBER_OF_MATCHES){
             defaultMatches = new Array();
             defaultMatches.push(new Match("Barack Obama", "http://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Official_portrait_of_Barack_Obama.jpg/100px-Official_portrait_of_Barack_Obama.jpg"));
             defaultMatches.push(new Match("George W. Bush", "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/George-W-Bush.jpeg/100px-George-W-Bush.jpeg"));
@@ -172,13 +183,13 @@ $(document).ready(function(){
             defaultMatches.push(new Match("Calvin Coolidge", "http://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Calvin_Coolidge.jpg/100px-Calvin_Coolidge.jpg"));
             defaultMatches.push(new Match("Warren G. Harding", "http://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Wh29.gif/100px-Wh29.gif"));
             //We should use only as many default cards as needed
-            while(matches.length < GAME.MATCHES){
-                matches.push(defaultMatches.shift());
+            while(GAME.matches.length < GAME.NUMBER_OF_MATCHES){
+                GAME.matches.push(defaultMatches.shift());
             }
         }
         
         //Shuffle the matches
-        matches = shuffle(matches);
+        GAME.matches = shuffle(GAME.matches);
         
         cards = new Array(GAME.CARDS);
         
@@ -189,8 +200,8 @@ $(document).ready(function(){
         cards = shuffle(cards);
         
         //Assign matches to cards
-        for(i = 0, j = 0; i < GAME.MATCHES; i++, j += 2){
-            var match = matches[i];
+        for(i = 0, j = 0; i < GAME.NUMBER_OF_MATCHES; i++, j += 2){
+            var match = GAME.matches[i];
             var $card1 = $(".card").eq(cards[j]);
             var $card2 = $(".card").eq(cards[j + 1]);
             //If the image source is a valid URL use the face image, otherwise use just the name
