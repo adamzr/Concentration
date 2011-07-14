@@ -127,9 +127,9 @@ $(document).ready(function(){
           $.each(response.data, function(index, value){
             matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token));
           });
+          localStorage["matches"] = JSON.stringify(matches);//Save them for next time
+          play();
         });
-        localStorage["matches"] = JSON.stringify(matches);//Save them for next time
-        play();
       };
       (function() {
         var e = document.createElement('script'); e.async = true;
