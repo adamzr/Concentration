@@ -122,15 +122,7 @@ $(document).ready(function(){
         //Load Facebook JS SDK
         window.fbAsyncInit = function() {
         FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
-        var access_token;
-        FB.getLoginStatus(function(response) {
-          if (response.session) {
-            access_token = response.session.access_token;
-          } else {
-            alert("Sorry, your Facebook friends could not be found.");
-            play();
-          }
-        });
+        var access_token = FB.getSession().access_token;
         FB.api('/me/friends', function(response) {
           $.each(response.data, function(index, value){
             matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token));
