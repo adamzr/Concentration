@@ -39,7 +39,9 @@ function onLinkedInLoad() {
   IN.Event.on(IN, "auth", onLinkedInAuth);
 }
 function onLinkedInAuth() {
-  IN.API.Connections("me").result(createInMatches)
+  if(window.location.hash.indexOf("linkedin") > 0){
+    IN.API.Connections("me").result(createInMatches)
+  }
 }
 
 function createInMatches(connections){
