@@ -10,18 +10,19 @@ shuffle = function(v){
     return v;
 };
 
-//Global variable
+//Global variable to avoid poluting namespace
 var GAME = {};
- 
-GAME.COLS = 8;
-GAME.ROWS = 4;
-GAME.CARDS = GAME.ROWS * GAME.COLS;
-GAME.NUMBER_OF_MATCHES = GAME.CARDS / 2;
-GAME.started = false;
+
+GAME.COLS = 8;//Number of columns
+GAME.ROWS = 4;//Number of rows
+GAME.CARDS = GAME.ROWS * GAME.COLS;//Number of cards
+GAME.NUMBER_OF_MATCHES = GAME.CARDS / 2;//Number of matches
+GAME.started = false;//Has the game started, i.e user turned over a card
 
 //The list of all the matches
 GAME.matches = new Array();
 
+//Extend jQuery so we can center the "You won" message
 jQuery.fn.center = function () {
     this.css("position","absolute");
     this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
@@ -31,19 +32,25 @@ jQuery.fn.center = function () {
 
 //A match, i.e. a pair of cards
 function Match(name, imgSrc){
-    this.name = name;
-    this.imgSrc = imgSrc;
+    this.name = name;//The person's name
+    this.imgSrc = imgSrc;//The URI to an image file to match to the name
 }
 
+// Callback for LinkenIn API load
 function onLinkedInLoad() {
-  IN.Event.on(IN, "auth", onLinkedInAuth);
+  IN.Event.on(IN, "auth", onLinkedInAuth);//Set callback for if we are authenticated
 }
+
+// Callback for if we are authenticated in to LinkedIn
 function onLinkedInAuth() {
+  //We only want to use LinkedIn if the user selected it
   if(window.location.hash.indexOf("linkedin") > 0){
-    IN.API.Connections("me").result(createInMatches)
+    // Make a call to get user's connections; set callback to handle them
+    IN.API.Connections("me").result(createInMatches);
   }
 }
 
+// Callback for got LinkedIn connections, makes them into matches
 function createInMatches(connections){
   $.each(connections.values, function(index, value){
     if(value.pictureUrl){
@@ -51,12 +58,13 @@ function createInMatches(connections){
     }
   })
   localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
-  play();
+  play();//Start the game
 }
 
 //Error handler for images
 function usename(event){
   $(event.srcElement).replaceWith("<p>" + $(event.srcElement).parent(".card").data("name") + "</p>");
+  console.warn("Image load failed!");
 }
 
 // Starts the game
@@ -103,18 +111,20 @@ function play(){
         var $card1 = $(".card").eq(cards[j]);
         var $card2 = $(".card").eq(cards[j + 1]);
         //If the image source is a valid URL use the face image, otherwise use just the name
+        var back = "<p>" + match.name + "</p>";
         if(match.imgSrc.trim().length > 0){
           $card1.find(".back").append("<span></span><img class='face' src='" + match.imgSrc + "' id='face" + i +"' onerror='usename'></img>");
         }
         else{
-          $card1.find(".back").append("<p>" + match.name + "</p>");
+          $card1.find(".back").append(back);
         }
         
-        $card2.find(".back").append("<p>" + match.name + "</p>");
+        $card2.find(".back").append(back);
         $card1.data("name", match.name);
         $card2.data("name", match.name);
     }
     
+    // Adds one second to the counter
     function timer(){
       $("#seconds").text(parseInt($("#seconds").text()) + 1);
     }
@@ -122,10 +132,12 @@ function play(){
     //If the image doesn't load use the name instead of the face
     $(".face").live("error", function(){
       $(this).replaceWith("<p>" + $(this).parent(".card").data("name") + "</p>");
+      console.warn("There was a problem loading an image.")
      });
     
     //Handle clicks on cards
     $(".card").click(function(){
+        // Start the timer on the first click
         if(!GAME.started){
             GAME.started = true;
             GAME.timerInteval = setInterval(timer, 1000);
@@ -141,15 +153,18 @@ function play(){
                 $(".flipped").removeClass("flipped");
             }
             $(this).toggleClass("flipped");
-            
+            //If there's two flipped over cards (one already flipped over, plus the one we just clicked on)
             if(flippedOver === 1){
+                // If there's a match 
                 if($(".flipped").eq(0).data("name") === $(".flipped").eq(1).data("name")){
-                    $(".flipped").fadeOut(3000,
+                    var delay = 3;// The fade out delay in seconds
+                    $(".flipped").fadeOut((delay * 1000),
                     function(){
                       $(this).remove();
+                      // Check if we won
                       if($(".card").length === 0){
                         clearInterval(GAME.timerInteval);
-                        var seconds = Math.max(parseInt($("#seconds").text()) - 3, 0);
+                        var seconds = Math.max(parseInt($("#seconds").text()) - delay, 0);
                         $("#seconds").text( seconds );
                         $("#main").html("<div id='winmessage'><h1>You Won in " + seconds + " seconds!</h1><br /><a href='javascript:location.reload()'>Play again?</a></div>");
                         $("#winmessage").center();
@@ -181,69 +196,82 @@ $(document).ready(function(){
             cache: false,//don't cache it, he may reload in which case we want latest results
             dataType: "jsonp xml",//the results are in JSON padded XML
             success: function(data, textStatus, jqXHR){
-                var $xml = $(data);//Create a jQuery XML document of results to search within
-                var $emails = $xml.find("email");//find all the email address elements
-				
-				var requestsMade = 0;
-				var requestsCompleted = 0;
-				$emails.each(function(){
-					var email = $(this).attr("address");//extract the emai address
-					//Get photos for the email address from RainMaker
-					
-          if(email && email.trim().length < 1){
-            //If there's no email address just skip it
-            return;
-          }
-          
-					$.ajax({
-						url: "http://api.rainmaker.cc/v1/person.json",
-						cache: false,
-						complete: function(jqXHR, textStatus){
-							requestsCompleted++;
-						},
-						data: {
-							email: email,
-							apiKey: "aa676803302af5e2",
-							timeoutSeconds: 30
-						},
-						dataType: "jsonp",
-						error: function(jqXHR, textStatus, errorThrown){
-							console.log(textStatus + ":" + errorThrown);
-						},
-						success: function(data, textStatus, jqXHR){
-							//If we have a name and a photo we're good to go
-							if("photos" in data && data.photos.length > 0 && "contactInfo" in data && "fullName" in data.contactInfo){
-								//Remove empty URLs
-                var photos = $.map(data.photos, function(photo, index){
-                  if(photo.url.trim().length > 0){
-                    return photo;
+              var $xml = $(data);//Create a jQuery XML document of results to search within
+              var $emails = $xml.find("email");//find all the email address elements
+              
+              var requestsMade = 0;
+              var requestsCompleted = 0;
+              $emails.each(function(){
+                var email = $(this).attr("address");//extract the emai address
+                
+                $images = $(this).prev("link[rel='http://schemas.google.com/contacts/2008/rel#photo']");
+                if($images.length > 0){
+                  var href = $images.eq(0).attr("href");
+                  var name = $(this).prev("title").text();
+                  if(name && name.trim().length > 0 && href && href.trim().length > 0){
+                    GAME.matches.push(new Match(name, href);
+                    return;//Use the Google image, no need to use Rainmaker.cc
                   }
-                  else{
-                    return null;
+                }
+                
+                //Get photos for the email address from RainMaker
+                
+                if(email && email.trim().length < 1){
+                  //If there's no email address just skip it
+                  return;
+                }
+                
+                $.ajax({
+                  url: "http://api.rainmaker.cc/v1/person.json",
+                  cache: false,
+                  complete: function(jqXHR, textStatus){
+                    requestsCompleted++;
+                  },
+                  data: {
+                    email: email,
+                    apiKey: "aa676803302af5e2",
+                    timeoutSeconds: 30
+                  },
+                  dataType: "jsonp",
+                  error: function(jqXHR, textStatus, errorThrown){
+                    console.error(textStatus + ":" + errorThrown);
+                  },
+                  success: function(data, textStatus, jqXHR){
+                    //If we have a name and a photo we're good to go
+                    if("photos" in data && data.photos.length > 0 && "contactInfo" in data && "fullName" in data.contactInfo){
+                      //Remove empty URLs
+                      var photos = $.map(data.photos, function(photo, index){
+                        if(photo.url.trim().length > 0){
+                          return photo;
+                        }
+                        else{
+                          return null;
+                        }
+                      });
+                      
+                      //Choose the photo to match with the face randomly from available photos
+                      GAME.matches.push(new Match(data.contactInfo.fullName, photos[Math.floor(Math.random() * photos.length)].url));
+                    }
                   }
                 });
-                
-                //Choose the photo to match with the face randomly from available photos
-								GAME.matches.push(new Match(data.contactInfo.fullName, photos[Math.floor(Math.random() * photos.length)].url));
-							}
-						}
-					});
-					requestsMade++;
-				});
+                requestsMade++;
+              });
 				
-				var checksMade = 0;
-				var maxChecks = 30;
-				function waitUntilComplete(){
-					if(requestsMade === requestsCompleted || checksMade === maxChecks){
-						localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
-						play();
-						return;
-					}
-					console.log("Waiting on " + (requestsMade - requestsCompleted) + " checks.");
-					checksMade++;
-					setTimeout(waitUntilComplete, 1000);
-				}
-				waitUntilComplete();
+              var checksMade = 0;// Number of checks we've made so far to determine if all ajax requests have completed
+              var maxChecks = 30;// Maximum number of times to check if all requests have been made before timing out
+              
+              // Start the game once all requests have completed or we've timed out
+              function waitUntilComplete(){
+                if(requestsMade === requestsCompleted || checksMade === maxChecks){
+                  localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
+                  play();// Start 
+                  return;
+                }
+                console.log("Waiting on " + (requestsMade - requestsCompleted) + " checks.");
+                checksMade++;
+                setTimeout(waitUntilComplete, 1000);// Recheck in one second
+              }
+              waitUntilComplete();
             }
         }
         );
@@ -255,12 +283,12 @@ $(document).ready(function(){
         window.fbAsyncInit = function() {
         FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
         var access_token = FB.getSession().access_token;
-        FB.api('/me/friends', function(response) {
+        FB.api('/me/friends', function(response) {//Get friends list
           $.each(response.data, function(index, value){
             GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
           });
           localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
-          play();
+          play();// Start the game!
         });
       };
       (function() {
