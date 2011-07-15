@@ -68,7 +68,6 @@
     <script type="text/javascript">
      function onLinkedInLoad() {
         IN.Event.on(IN, "auth", onLinkedInAuth);
-        document.getElementById('li_ui_li_gen_1310767149414_0-title-text').textContent = "Play with LinkedIn";
      }
      function onLinkedInAuth() {
        window.location = "http://adamrich.name/Concentration/play.html#linkedin";
@@ -97,7 +96,7 @@
         <div id="fbplay" class="append-8 span-8 prepend-8 last"><fb:login-button>Play with Facebook!</fb:login-button></div>
         <br />
         <br />
-        <div class="append-8 span-8 prepend-8 last">
+        <div id="linkedinbutton" class="append-8 span-8 prepend-8 last">
           <script type="in/Login">
             <a href="./play.html#linkedin" class="css3button append-8 span-8 prepend-8 last">Play with LinkedIn!</a>
           </script>
@@ -129,7 +128,9 @@
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.1.min.js"><\/script>')</script>
-
+  <script type="text/javascript">
+  $("#linkedinbutton span[id$='title-text']").text("Play with LinkedIn")
+  </script>
   <!-- end scripts-->
 
 
