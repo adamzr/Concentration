@@ -55,7 +55,7 @@
         });
         //If we are already logged in then clicking oin the button takes us to the play page
         if(FB.getSession()){
-          $("#fbplay").click(function(){ window.location = "http://adamrich.name/Concentration/play.html#facebook" })
+          document.getElementById("fbplay").addEventListener("click", function(){ window.location = "http://adamrich.name/Concentration/play.html#facebook" })
         }
       };
       (function() {
