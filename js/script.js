@@ -209,7 +209,7 @@ $(document).ready(function(){
                   var href = $images.eq(0).attr("href");
                   var name = $(this).prev("title").text();
                   if(name && name.trim().length > 0 && href && href.trim().length > 0){
-                    GAME.matches.push(new Match(name, href);
+                    GAME.matches.push(new Match(name, href));
                     return;//Use the Google image, no need to use Rainmaker.cc
                   }
                 }
