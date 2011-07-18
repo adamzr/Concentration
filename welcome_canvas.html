@@ -1,0 +1,132 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+       Remove this if you use the .htaccess -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Concentration - Welcome</title>
+  <meta name="description" content="A memory matching game to improve both your memory of faces and your short-term memory. Match the names of your friends with their names to win.">
+  <meta name="author" content="Adam Richeimer">
+
+  <!-- Mobile viewport optimized: j.mp/bplateviewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons -->
+  <link rel="icon" type="image/png" href="http://adamrich.name/Concentration/concentration_16x16.png" />
+  <!-- For iPhone 4 with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://adamrich.name/Concentration/concentration_128x128.png">
+  <!-- For first-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://adamrich.name/Concentration/concentration_72x72.png">
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+  <!-- CSS: implied media="all" -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">
+  <!--[if lt IE 8]>
+    <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+  <![endif]-->
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+  <meta http-equiv="imagetoolbar" content="false" />
+  
+
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+        <h1 id="title">Concentration</h1>
+    </header>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
+        FB.Event.subscribe('auth.login', function(response) {
+          window.location = "http://adamrich.name/Concentration/play.html#facebook"
+        });
+        //If we are already logged in then clicking oin the button takes us to the play page
+        if(FB.getSession()){
+          document.getElementById("fbplay").addEventListener("click", function(){ window.location = "http://adamrich.name/Concentration/play_canvas.html#facebook" })
+        }
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    </script>
+
+    <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+      api_key: R-FYmywiJGg_gbJCC71UI150HtuzpjVDqEam8wOBg5RnrWJ4-AsQFEqtyU6ab6Ru
+      onLoad: onLinkedInLoad
+    </script>
+    
+    <div id="main" role="main" class="container">
+        <div class="error" id="browsersupport">
+        This game will not work in your browser. Please switch to a browser that supports advanced features icluding <a href="http://caniuse.com/transforms3d">CSS 3D transforms</a>, such as <a href="http://www.google.com/chrome/">Google Chrome</a>.
+        </div>
+        <p>
+        This is the classic game of <a href="http://en.wikipedia.org/wiki/Concentration_(game)">Concentration aka Memory</a>. You have to match people's faces to their names. Start the game by clicking on a card to turn it over. Only two cards can be flipped over at a time. If the flipped over cards match they will disappear. The goal is to make the cards disappear as fast as possible.
+        </p>
+        
+        <p>For your privacy and security these contacts are never sent to our servers, they are only stored on your computer.</p>
+        
+        <p>These pictures are taken from their public profile pictures on social networks and may not neceasrily be of their faces.</p>
+        <p><strong>Good luck!</strong></p>
+
+        <div id="fbplay" class="append-8 span-8 prepend-8 last"><fb:login-button>Play!</fb:login-button></div>
+
+
+        <strong>This site requires <a href="http://www.google.com/chrome/">Google Chrome</a>.</strong>
+        
+        <noscript><strong class="error">This page uses Javascript. Your browser either doesn't support Javascript or you have it turned off. To see this page as it is meant to appear please use a Javascript enabled browser.</strong></noscript>
+        
+        <p>Site by <a href="http://adamrich.info/">Adam Rich</a></p>
+        <p>Source code available on <a href="https://github.com/adamzr/Concentration">GitHub</a>.</p>
+        <p><a href="http://www.freedigitalphotos.net/images/view_photog.php?photogid=659">Image: Salvatore Vuono / FreeDigitalPhotos.net</a></p>
+        <p><a href="http://html5boilerplate.com/">Uses HTML5 Boiler Plate</a></p>
+        
+        <a href="http://www.webfaction.com?affiliate=adamrich"><img src="http://www.webfaction.com/banners/webfaction-240x60-reliable.png" alt="Webfaction - Reliable hosting from $5.50/mo" title="Hosted by WebFaction"/></a>
+        
+        <!--BEGIN NAMECHEAP LINK --><a href="Http://www.namecheap.com?aff=20284"><img src="http://files.namecheap.com/graphics/linkus/88x31-9.gif" height="31" width="88" border="0" alt="Namecheap.com - Cheap domain name registration, renewal and transfers - Free SSL Certificates - Web Hosting"></a><!--END NAMECHEAP LINK -->
+        
+    </div>
+    <footer>
+
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.1.min.js"><\/script>')</script>
+  <script type="text/javascript">
+  function changeLinkedInButtonText(){
+    $("#linkedinbutton span[id$='title-text']").text("Play with LinkedIn!");
+  }
+  </script>
+  <!-- end scripts-->
+
+
+
+  <script>
+    var _gaq=[['_setAccount','UA-16826446-6'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+</body>
+</html>
