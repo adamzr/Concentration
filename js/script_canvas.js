@@ -13,8 +13,8 @@ shuffle = function(v){
 //Global variable to avoid poluting namespace
 var GAME = {};
 
-GAME.COLS = 6;//Number of columns
-GAME.ROWS = 4;//Number of rows
+GAME.COLS = 8;//Number of columns
+GAME.ROWS = 3;//Number of rows
 GAME.CARDS = GAME.ROWS * GAME.COLS;//Number of cards
 GAME.NUMBER_OF_MATCHES = GAME.CARDS / 2;//Number of matches
 GAME.started = false;//Has the game started, i.e user turned over a card
