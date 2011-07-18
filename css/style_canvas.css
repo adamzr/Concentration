@@ -1,0 +1,379 @@
+/**
+ * HTML5 ? Boilerplate
+ *
+ * style.css contains a reset, font normalization and some base styles.
+ *
+ * Credit is left where credit is due.
+ * Much inspiration was taken from these projects:
+ * - yui.yahooapis.com/2.8.1/build/base/base.css
+ * - camendesign.com/design/
+ * - praegnanz.de/weblog/htmlcssjs-kickstart
+ */
+
+
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
+
+html, body, body div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content: ""; content: none; }
+
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+
+/**
+ * Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
+ */
+
+body { font: 13px/1.231 sans-serif; *font-size: small; } /* Hack retained to preserve specificity */
+
+/* Normalize monospace sizing:
+   en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+
+/**
+ * Minimal base styles.
+ */
+
+/* 1) Always force a scrollbar in non-IE 
+   2) Remove iOS text size adjust without disabling user zoom: www.456bereastreet.com/archive/201012/controlling_text_size_in_safari_for_ios_without_disabling_user_zoom/ */
+html { overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  
+
+
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: 0; }
+
+a, a:active, a:visited { color: #607890; }
+a:hover { color: #036; }
+
+ul, ol { margin-left: 2em; }
+ol { list-style-type: decimal; }
+
+/* Remove margins for navigation lists */
+nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
+
+small { font-size: 85%; }
+b, strong, th { font-weight: bold; }
+
+td { vertical-align: top; }
+
+/* Set sub, sup without affecting line-height: gist.github.com/413930 */
+sub, sup { font-size: 75%; line-height: 0; position: relative; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+pre {
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; white-space: pre-wrap; word-wrap: break-word;
+  padding: 15px;
+}
+
+.ie6 legend, .ie7 legend { margin-left: -7px; } 
+
+/* 1) Make inputs and buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/
+   2) WebKit browsers add a 2px margin outside the chrome of form elements. 
+      Firefox adds a 1px margin above and below textareas 
+   3) Set font-size to match <body>'s, and font-family to sans-serif 
+   4) Align to baseline */
+button, input, select, textarea { width: auto; overflow: visible; margin: 0; font-size: 100%; font-family: sans-serif; vertical-align: baseline; }
+
+/* 1) Remove default scrollbar in IE: www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/
+   2) Align to text-top */
+textarea { overflow: auto; vertical-align:text-top; }
+
+/* Hand cursor on clickable input elements */
+label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
+
+/* Remove extra padding and inner border in Firefox */
+input::-moz-focus-inner,
+button::-moz-focus-inner { border: 0; padding: 0; }
+
+/* Colors for form validity */
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { border-radius: 1px; -moz-box-shadow: 0 0 5px red; -webkit-box-shadow: 0 0 5px red; box-shadow: 0 0 5px red; }
+.no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
+
+/* Bicubic resizing for non-native sized IMG:
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+
+/**
+ * You might tweak these..
+ */
+
+body, select, input, textarea {
+  /* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */
+  color: #444;
+  /* Set your base font here, to apply evenly */
+  /* font-family: Georgia, serif;  */
+}
+
+/* These selection declarations have to be separate
+   No text-shadow: twitter.com/miketaylr/status/12228805301
+   Also: hot pink! */
+::-moz-selection { background: #fe57a1; color:#fff; text-shadow: none; }
+::selection { background:#fe57a1; color:#fff; text-shadow: none; }
+a:link { -webkit-tap-highlight-color: #FF5E99; } /* j.mp/webkit-tap-highlight-color */
+
+
+/**
+ * Primary styles
+ *
+ * Author: Adam Richeimer
+ */
+
+ html body{
+	background-color: white;
+ }
+ 
+.cardcontainer { 
+  width: 90px;
+  height: 145px;
+  position: relative;
+  margin-bottom: 10px;
+  -webkit-perspective: 800;
+  -moz-perspective: 800;
+  -o-perspective: 800;
+  -ms-perspective: 800;
+  perspective: 800;
+  
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 1s;
+  -moz-transition: -moz-transform 1s;
+  -o-transition: -o-transform 1s;
+  -ms-transition: -ms-transform 1s;
+  transition: transform 1s;
+}
+
+.card figure {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -ie-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card .front {
+  background-color: #6D695C;
+  background-image: -webkit-repeating-linear-gradient(-30deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px), -webkit-repeating-linear-gradient(30deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px), -webkit-linear-gradient(30deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)), -webkit-linear-gradient(-30deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
+  background-image: -moz-repeating-linear-gradient(-30deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px), -moz-repeating-linear-gradient(30deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px), -moz-linear-gradient(30deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)), -moz-linear-gradient(-30deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
+  background-image: repeating-linear-gradient(-30deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px), repeating-linear-gradient(30deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px), linear-gradient(30deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)), linear-gradient(-30deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
+  background-size: 70px 120px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -o-border-radius: 30px;
+  -ms-border-radius: 30px;
+  border-radius: 30px; /* future proofing */
+}
+
+.card .back {
+  background: grey;
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+  -o-transform: rotateY( 180deg );
+  -ie-transform: rotateY( 180deg );
+  transform: rotateY( 180deg );
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -o-border-radius: 30px;
+  -ie-border-radius: 30px;
+  border-radius: 30px; /* future proofing */
+  display: block;
+  border: 15px 15px;
+}
+
+.card .back img{
+    margin-top: 15px;
+	display: table-cell;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+	max-height: 110px;
+	vertical-align: middle;
+}
+
+.card .back p{
+  padding-top: 62px;
+	margin-bottom: auto;
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+}
+
+.card.flipped {
+  -webkit-transform: rotateY( 180deg );
+  -moz-transform: rotateY( 180deg );
+  -o-transform: rotateY( 180deg );
+  -ie-transform: rotateY( 180deg );
+  transform: rotateY( 180deg );
+}
+
+.css3button {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: black;
+  font-weight: bold;
+  text-decoration: none;
+	padding: 10px 20px;
+	background: -moz-linear-gradient(
+		top,
+		#ffffff 0%,
+		#c7d95f 50%,
+		#add136 50%,
+		#6d8000);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#ffffff),
+		color-stop(0.50, #c7d95f),
+		color-stop(0.50, #add136),
+		to(#6d8000));
+	border-radius: 14px;
+	-moz-border-radius: 14px;
+	-webkit-border-radius: 14px;
+	border: 1px solid #007780;
+	-moz-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 2px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.2),
+		0px 1px 0px rgba(255,255,255,0.4);
+}
+
+#title {
+  text-align: center;
+}
+
+#winmessage {
+  text-align: center;
+}
+
+.csstransforms3d #browsersupport {
+  display: none;
+}
+
+/**
+ * Non-semantic helper classes: please define your styles before this section.
+ */
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide for both screenreaders and browsers:
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders: by Jon Neal.
+  www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: drupal.org/node/897638 */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements in most situations.
+   nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+
+
+/**
+ * Placeholder media queries for responsive design. Modify as design requires.
+ * These follow after, and will override, the primary ('mobile first') styles
+ */
+
+@media only screen and (min-width: 480px) {
+  /* Style adjustments for viewports 480px and over go here */
+
+}
+
+@media only screen and (min-width: 768px) {
+  /* Style adjustments for viewports 768px and over go here */
+
+}
+
+
+
+/**
+ * Print styles.
+ *
+ * Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+ */
+@media print {
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important;
+  -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+
+/* Copyright 2011 Google Inc. All Rights Reserved. */
+.gfc-button-base-v2{height:21px;line-height:21px;margin:0;padding:0;color:#fff;white-space:no-wrap;border-spacing:0;font:normal 13px Arial,sans-serif}.gfc-grey-button .gfc-button-base-v2{color:#666}table.gfc-button{border:none!important;cursor:pointer!important;width:auto!important;margin:0!important;padding:0!important;height:21px!important;line-height:21px!important}table.gfc-button td,table.gfc-button tr,table.gfc-button tbody{text-align:left!important;vertical-align:top!important;border:none!important;margin:0!important;border-spacing:0!important;height:21px!important;white-space:nowrap!important;line-height:21px!important}td.gfc-button-1{width:22px!important;padding:0!important;background:transparent url(http://www.google.com/friendconnect/scs/images/gfc_button_v2.gif) no-repeat 0 0}.gfc-grey-button td.gfc-button-1{background:transparent url(http://www.google.com/friendconnect/scs/images/gfc_button_v2grey.gif) no-repeat 0 0}td.gfc-button-2{background:transparent url(http://www.google.com/friendconnect/scs/images/gfc_button_v2.gif) repeat-x 0 -22px;padding:0 7px!important;font-weight:bold!important;text-shadow:rgba(0,0,0,0.3) 0 1px 1px!important}.gfc-grey-button td.gfc-button-2{background:transparent url(http://www.google.com/friendconnect/scs/images/gfc_button_v2grey.gif) repeat-x 0 -22px}td.gfc-button-3{width:2px!important;padding:0!important;background:transparent url(http://www.google.com/friendconnect/scs/images/gfc_button_v2.gif) no-repeat 0 -44px}.gfc-grey-button td.gfc-button-3{background:transparent url(http://www.google.com/friendconnect/scs/images/gfc_button_v2grey.gif) no-repeat 0 -44px}html>body .gfc-inline-block{display:-moz-inline-box;display:inline-block;}.gfc-inline-block{position:relative;display:inline-block}* html .gfc-inline-block{display:inline}*:first-child+html .gfc-inline-block{display:inline}.gfc-button-base{cursor:default;font:normal 13px Arial,sans-serif;letter-spacing:normal;margin:0 1px;outline:none;text-align:center;text-indent:0;text-transform:none;white-space:nowrap;word-spacing:normal}.gfc-button-base-outer-box{border-top:1px solid #aaa;border-bottom:1px solid #aaa}.gfc-button-base-inner-box{background:#e3e3e3;border-left:1px solid #bbb;border-right:1px solid #aaa;margin:0 -1px}.gfc-button-base-pos{position:relative}.gfc-button-base-top-shadow{background:#f9f9f9;border-bottom:.23em solid #eee;height:.692em;left:0;overflow:hidden;position:absolute;right:0;top:0}.gfc-button-base-content{color:#333;line-height:19px;position:relative;padding:0 .200em;text-align:center}* html .gfc-button-base-inner-box{left:-1px}* html .gfc-button-base-pos{height:auto}* html .gfc-button-base-top-shadow{height:auto;line-height:.692em;position:static}* html .gfc-button-base-content{display:inline-block}* html .gfc-button-base-content{display:inline;margin-top:-.922em}* html .gfc-button-base-rtl .gfc-button-base-outer-box{left:-1px}* html .gfc-button-base-rtl .gfc-button-base-inner-box{left:0}*:first-child+html .gfc-button-base-inner-box{left:-1px}*:first-child+html .gfc-button-base-content{display:inline-block}*:first-child+html .gfc-button-base-rtl .gfc-button-base-inner-box{left:1px}::root .gfc-button-base,::root .gfc-button-base-outer-box{line-height:0}::root .gfc-button-base-inner-box{line-height:normal}.gfc-primaryactionbutton .gfc-button-base-content{font-weight:bold;cursor:pointer;font-size:13px}.gfc-primaryactionbutton .gfc-button-base-outer-box,.gfc-primaryactionbutton.gfc-button-base-hover .gfc-button-base-outer-box,.gfc-primaryactionbutton.gfc-button-base-focused .gfc-button-base-outer-box{border-top-color:#bbb;border-bottom-color:#bbb}.gfc-primaryactionbutton .gfc-button-base-inner-box,.gfc-primaryactionbutton.gfc-button-base-hover .gfc-button-base-inner-box,.gfc-primaryactionbutton.gfc-button-base-focused .gfc-button-base-inner-box{border-left-color:#bbb;border-right-color:#bbb}.gfc-icon{background-image:url(http://www.google.com/friendconnect/scs/images/googleicon.gif);background-repeat:no-repeat;background-position:left 50%;padding-left:23px;padding-right:3px}.gfc-footer-msg{padding-left:2px;margin-top:1px;line-height:11px;font-size:11px;font-style:normal;font-weight:normal;font-family:sans-serif}

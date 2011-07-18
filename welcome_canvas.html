@@ -28,8 +28,8 @@
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
 
   <!-- CSS: implied media="all" -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="css/style_canvas.css">
+  <link rel="stylesheet" href="css/blueprint/screen_canvas.css" type="text/css" media="screen, projection">
   <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print">
   <!--[if lt IE 8]>
     <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
@@ -51,7 +51,7 @@
       window.fbAsyncInit = function() {
         FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
         FB.Event.subscribe('auth.login', function(response) {
-          window.location = "http://adamrich.name/Concentration/play.html#facebook"
+          window.location = "http://adamrich.name/Concentration/play_canvas.html#facebook"
         });
         //If we are already logged in then clicking oin the button takes us to the play page
         if(FB.getSession()){
