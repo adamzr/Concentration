@@ -285,7 +285,7 @@ $(document).ready(function(){
         var access_token = FB.getSession().access_token;
         FB.api('/me/friends', function(response) {//Get friends list
           $.each(response.data, function(index, value){
-            GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
+            GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=small"));
           });
           localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
           play();// Start the game!
