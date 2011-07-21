@@ -302,6 +302,9 @@ $(document).ready(function(){
                 if(data !== "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg"){
                   GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
                 }
+                else{
+                  console.log(value.name + " has no Facebook profile picture");
+                }
               }
             });
             
