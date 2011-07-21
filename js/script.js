@@ -296,7 +296,7 @@ $(document).ready(function(){
               },
               dataType: 'jsonp',
               error: function(jqXHR, textStatus, errorThrown){
-                console.error("Error resolving URL, "textStatus);
+                console.error("Error resolving URL, " + textStatus);
               },
               success: function(data, textStatus, jqXHR){
                 if(data !== "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg"){
