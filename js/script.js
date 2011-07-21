@@ -249,7 +249,7 @@ $(document).ready(function(){
                   },
                   dataType: "jsonp",
                   error: function(jqXHR, textStatus, errorThrown){
-                    console.error(textStatus + ":" + errorThrown);
+                    console.error("There was an error on the Rainmaker.cc call, status is:" + textStatus);
                   },
                   success: function(data, textStatus, jqXHR){
                     //If we have a name and a photo we're good to go
