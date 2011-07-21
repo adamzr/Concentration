@@ -180,6 +180,21 @@ function play(){
     $.unblockUI();
 }
 
+GAME.checksMade = 0;// Number of checks we've made so far to determine if all ajax requests have completed
+GAME.maxChecks = 30;// Maximum number of times to check if all requests have been made before timing out
+
+// Start the game once all requests have completed or we've timed out
+function waitUntilComplete(){
+  if(GAME.requestsMade === GAME.requestsCompleted || GAME.checksMade === GAME.maxChecks){
+    localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
+    play();// Start 
+    return;
+  }
+  console.log("Waiting on " + (GAME.requestsMade - GAME.requestsCompleted) + " checks.");
+  GAME.checksMade++;
+  setTimeout(waitUntilComplete, 1000);// Recheck in one second
+}
+
 //When the document is ready start the game
 $(document).ready(function(){
     //Block the UI while we build the game 
@@ -216,7 +231,7 @@ $(document).ready(function(){
                 
                 //Get photos for the email address from RainMaker
                 
-                if(email && email.trim().length < 1){
+                if(!email || email.trim().length < 1){
                   //If there's no email address just skip it
                   return;
                 }
@@ -225,7 +240,7 @@ $(document).ready(function(){
                   url: "http://api.rainmaker.cc/v1/person.json",
                   cache: false,
                   complete: function(jqXHR, textStatus){
-                    requestsCompleted++;
+                    GAME.requestsCompleted++;
                   },
                   data: {
                     email: email,
@@ -254,24 +269,10 @@ $(document).ready(function(){
                     }
                   }
                 });
-                requestsMade++;
+                GAME.requestsMade++;
               });
 				
-              var checksMade = 0;// Number of checks we've made so far to determine if all ajax requests have completed
-              var maxChecks = 30;// Maximum number of times to check if all requests have been made before timing out
-              
-              // Start the game once all requests have completed or we've timed out
-              function waitUntilComplete(){
-                if(requestsMade === requestsCompleted || checksMade === maxChecks){
-                  localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
-                  play();// Start 
-                  return;
-                }
-                console.log("Waiting on " + (requestsMade - requestsCompleted) + " checks.");
-                checksMade++;
-                setTimeout(waitUntilComplete, 1000);// Recheck in one second
-              }
-              waitUntilComplete();
+              waitUntilComplete();//Start the game once all requests are complete
             }
         }
         );
@@ -285,10 +286,27 @@ $(document).ready(function(){
         var access_token = FB.getSession().access_token;
         FB.api('/me/friends', function(response) {//Get friends list
           $.each(response.data, function(index, value){
-            GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
+            $.ajax("http://adamrich.webfactional.com/resolve",
+            {
+              complete: function(jqXHR, textStatus){
+                GAME.requestsCompleted++;
+              },
+              data: {
+                url: "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"
+              },
+              dataType: 'jsonp',
+              error: function(jqXHR, textStatus, errorThrown){
+                console.error("Error resolving URL, "textStatus);
+              },
+              success: function(data, textStatus, jqXHR){
+                if(data !== "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg"){
+                  GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
+                }
+              }
+            });
+            
           });
-          localStorage["matches"] = JSON.stringify(GAME.matches);//Save them for next time
-          play();// Start the game!
+          waitUntilComplete();//Start the game once all requests are complete
         });
       };
       (function() {
