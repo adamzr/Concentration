@@ -180,6 +180,7 @@ function play(){
     $.unblockUI();
 }
 
+GAME.requestsMade = 0;// How many ajax requests have been made that must be completed before the game starts
 GAME.checksMade = 0;// Number of checks we've made so far to determine if all ajax requests have completed
 GAME.maxChecks = 30;// Maximum number of times to check if all requests have been made before timing out
 
@@ -214,8 +215,6 @@ $(document).ready(function(){
               var $xml = $(data);//Create a jQuery XML document of results to search within
               var $emails = $xml.find("email");//find all the email address elements
               
-              var requestsMade = 0;
-              var requestsCompleted = 0;
               $emails.each(function(){
                 var email = $(this).attr("address");//extract the emai address
                 
@@ -307,6 +306,7 @@ $(document).ready(function(){
                 }
               }
             });
+            GAME.requestsMade++;
             
           });
           waitUntilComplete();//Start the game once all requests are complete
