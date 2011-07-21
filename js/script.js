@@ -181,6 +181,7 @@ function play(){
 }
 
 GAME.requestsMade = 0;// How many ajax requests have been made that must be completed before the game starts
+GAME.requestsComplete = 0;//How many of the ajax requests have completed
 GAME.checksMade = 0;// Number of checks we've made so far to determine if all ajax requests have completed
 GAME.maxChecks = 30;// Maximum number of times to check if all requests have been made before timing out
 
