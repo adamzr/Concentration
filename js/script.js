@@ -299,7 +299,7 @@ $(document).ready(function(){
                 console.error("Error resolving URL, " + textStatus);
               },
               success: function(data, textStatus, jqXHR){
-                if(data !== "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg"){
+                if(["https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg", "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yV/r/Xc3RyXFFu-2.jpg"].indexOf(data !== -1)){
                   GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
                 }
                 else{
