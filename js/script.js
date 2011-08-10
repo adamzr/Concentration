@@ -342,3 +342,16 @@ $(document).ready(function(){
     
 
 });
+
+function handleVisibilityChange(){
+    if (document.hidden || document.msHidden || document.webkitHidden){
+        clearInterval(GAME.timerInteval);
+    } else {
+        GAME.timerInteval = setInterval(timer, 1000);
+    }
+}
+
+//need to add to both
+document.addEventListener("msvisibilitychange", handleVisibilityChange, false);
+document.addEventListener("webkitvisibilitychange", handleVisibilityChange, false);
+document.addEventListener("visibilitychange", handleVisibilityChange, false);
