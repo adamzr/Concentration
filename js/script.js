@@ -72,6 +72,25 @@ var incrementTimer = function(){
   $("#seconds").text(parseInt($("#seconds").text()) + 1);
 }
 
+function getBase64Image(img) {
+    // Create an empty canvas element
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Copy the image contents to the canvas
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Get the data-URL formatted image
+    // Firefox supports PNG and JPEG. You could check img.src to
+    // guess the original format, but be aware the using "image/jpg"
+    // will re-encode the image.
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL;
+}
+
 // Starts the game
 function play(){
     //If there's not enough matches we'll need to use the default cards
@@ -123,7 +142,9 @@ function play(){
         else{
           $card1.find(".back").append(back);
         }
-        
+        var tempImg = new Image();
+        tempImg.src = match.imgSrc;
+        console.log(getBase64Image(tempImg));
         $card2.find(".back").append(back);
         $card1.data("name", match.name);
         $card2.data("name", match.name);
