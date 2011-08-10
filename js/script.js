@@ -364,13 +364,13 @@ $(document).ready(function(){
 });
 
 function handleVisibilityChange(){
-    $music = $("#music");
+    var music = $("#music")[0];
     if (document.hidden || document.msHidden || document.webkitHidden){
         clearInterval(GAME.timerInteval);
-        $music.pause();
+        music.pause();
     } else {
         GAME.timerInteval = setInterval(incrementTimer, 1000);
-        $music.play();
+        music.play();
     }
 }
 
