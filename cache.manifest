@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#rev 1
+#rev 2
 CACHE:
 /Concentration/css/style.css
 /Concentration/css/blueprint/screen.css
@@ -17,3 +17,4 @@ NETWORK:
 http://platform.linkedin.com/in.js
 http://www.google-analytics.com/ga.js
 http://connect.facebook.net/en_US/all.js
+*
