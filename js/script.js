@@ -67,6 +67,11 @@ function usename(event){
   console.warn("Image load failed!");
 }
 
+// Adds one second to the counter
+function timer(){
+  $("#seconds").text(parseInt($("#seconds").text()) + 1);
+}
+
 // Starts the game
 function play(){
     //If there's not enough matches we'll need to use the default cards
@@ -122,11 +127,6 @@ function play(){
         $card2.find(".back").append(back);
         $card1.data("name", match.name);
         $card2.data("name", match.name);
-    }
-    
-    // Adds one second to the counter
-    function timer(){
-      $("#seconds").text(parseInt($("#seconds").text()) + 1);
     }
     
     //If the image doesn't load use the name instead of the face
