@@ -201,8 +201,13 @@ $(document).ready(function(){
     //Block the UI while we build the game 
     $.blockUI({ message: '<h1>Game loading. Just a minute...</h1>' });
     
+    //If we are offline use cached matches
+    if(!navigator.onLine && localStorage['matches']){
+        GAME.matches = JSON.parse(localStorage['matches']);
+        play();
+    }
     //If we got authorization for Google Contacts use it
-    if(window.location.hash.indexOf("access_token") > 0){
+    else if(window.location.hash.indexOf("access_token") > 0){
         //Get the OAuth2 Token
         var token = window.location.hash.split("access_token=")[1].split("&")[0];
         

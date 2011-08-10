@@ -1,0 +1,2 @@
+IndexIgnore *
+AddType text/cache-manifest .manifest
