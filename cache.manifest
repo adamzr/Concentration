@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#rev 2
+#rev 3
 CACHE:
 /Concentration/css/style.css
 /Concentration/css/blueprint/screen.css
@@ -8,6 +8,8 @@ CACHE:
 /Concentration/js/libs/jquery-1.6.1.min.js
 /Concentration/js/plugins.js
 /Concentration/js/script.js
+/Concentration/audio/music.mp3
+/Concentration/audio/music.ogg
 http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js
 http://www.webfaction.com/banners/webfaction-240x60-reliable.png
 http://files.namecheap.com/graphics/linkus/88x31-9.gif
