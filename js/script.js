@@ -68,7 +68,7 @@ function usename(event){
 }
 
 // Adds one second to the counter
-function timer(){
+var timer = function(){
   $("#seconds").text(parseInt($("#seconds").text()) + 1);
 }
 
