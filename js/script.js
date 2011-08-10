@@ -68,7 +68,7 @@ function usename(event){
 }
 
 // Adds one second to the counter
-var timer = function(){
+var incrementTimer = function(){
   $("#seconds").text(parseInt($("#seconds").text()) + 1);
 }
 
@@ -140,7 +140,7 @@ function play(){
         // Start the timer on the first click
         if(!GAME.started){
             GAME.started = true;
-            GAME.timerInteval = setInterval(timer, 1000);
+            GAME.timerInteval = setInterval(incrementTimer, 1000);
         }
         if( $(this).hasClass("flipped")){
             //If you turn over one you already turned over, all get turned back over
@@ -347,7 +347,7 @@ function handleVisibilityChange(){
     if (document.hidden || document.msHidden || document.webkitHidden){
         clearInterval(GAME.timerInteval);
     } else {
-        GAME.timerInteval = setInterval(timer, 1000);
+        GAME.timerInteval = setInterval(incrementTimer, 1000);
     }
 }
 
