@@ -72,25 +72,6 @@ var incrementTimer = function(){
   $("#seconds").text(parseInt($("#seconds").text()) + 1);
 }
 
-function getBase64Image(img) {
-    // Create an empty canvas element
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    // Copy the image contents to the canvas
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    // Get the data-URL formatted image
-    // Firefox supports PNG and JPEG. You could check img.src to
-    // guess the original format, but be aware the using "image/jpg"
-    // will re-encode the image.
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL;
-}
-
 // Starts the game
 function play(){
     //If there's not enough matches we'll need to use the default cards
@@ -142,9 +123,6 @@ function play(){
         else{
           $card1.find(".back").append(back);
         }
-        var tempImg = new Image();
-        tempImg.src = match.imgSrc;
-        console.log(getBase64Image(tempImg));
         $card2.find(".back").append(back);
         $card1.data("name", match.name);
         $card2.data("name", match.name);
@@ -324,7 +302,23 @@ $(document).ready(function(){
                 "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yo/r/UlIqmHJn-SK.gif",
                 "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yi/r/odA9sNLrE86.jpg",
                 "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yL/r/HsTZSDw4avx.gif"].indexOf(data) === -1){
-                  GAME.matches.push(new Match(value.name, "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"));
+                  $.ajax("http://adamrich.webfactional.com/datauri",
+                  {
+                    complete: function(jqXHR, textStatus){
+                      GAME.requestsCompleted++;
+                    },
+                    data: {
+                      url: "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"
+                    },
+                    dataType: 'jsonp',
+                    error: function(jqXHR, textStatus, errorThrown){
+                      console.error("Error converting to Data URI, " + textStatus);
+                    },
+                    success: function(data, textStatus, jqXHR){
+                        GAME.matches.push(new Match(value.name, data));
+                    }
+                  });
+                  GAME.requestsMade++;
                 }
                 else{
                   console.log(value.name + " has no Facebook profile picture");
