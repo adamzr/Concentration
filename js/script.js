@@ -167,6 +167,15 @@ function play(){
                         $("#seconds").text( seconds );
                         $("#main").html("<div id='winmessage'><h1>You Won in " + seconds + " seconds!</h1><br /><a href='javascript:location.reload()'>Play again?</a></div>");
                         $("#winmessage").center();
+                        if(window.location.hash.indexOf("facebook") > 0){
+                          FB.api("/me/scores", 'post', {score: seconds}, function(response){
+                            if (!response || response.error) {
+                              console.error("There was a problem sending the score to FB.")
+                            } else {
+                              console.log(response);
+                            }
+                          });
+                        }
                       }
                     }
                     );
