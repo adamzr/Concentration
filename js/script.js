@@ -184,7 +184,7 @@ function play(){
         }
         
     });
-    
+    $("#music")[0].play();
     $.unblockUI();
 }
 
@@ -363,7 +363,11 @@ $(document).ready(function(){
 });
 
 function handleVisibilityChange(){
-    var music = $("#music")[0];
+    var $music = $("#music");
+    if($music.length < 1){
+      return;
+    }
+    var music = $music[0];
     if (document.hidden || document.msHidden || document.webkitHidden){
         if(GAME.started){
           clearInterval(GAME.timerInteval);
