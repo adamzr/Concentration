@@ -294,57 +294,55 @@ $(document).ready(function(){
     //If we got authorization for Facebook use it
     else if(window.location.hash.indexOf("facebook") > 0){
         //Load Facebook JS SDK
-        window.fbAsyncInit = function() {
-        FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
         var access_token = FB.getSession().access_token;
         FB.api('/me/friends', function(response) {//Get friends list
           $.each(response.data, function(index, value){
-            $.ajax("http://adamrich.webfactional.com/resolve",
-            {
-              complete: function(jqXHR, textStatus){
-                GAME.requestsCompleted++;
-              },
-              data: {
-                url: "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"
-              },
-              dataType: 'jsonp',
-              error: function(jqXHR, textStatus, errorThrown){
-                console.error("Error resolving URL, " + textStatus);
-              },
-              success: function(data, textStatus, jqXHR){
-                if(["https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg", "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yV/r/Xc3RyXFFu-2.jpg",
-                "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yo/r/UlIqmHJn-SK.gif",
-                "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yi/r/odA9sNLrE86.jpg",
-                "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yL/r/HsTZSDw4avx.gif"].indexOf(data) === -1){
-                  $.ajax("http://adamrich.webfactional.com/datauri",
-                  {
-                    complete: function(jqXHR, textStatus){
-                      GAME.requestsCompleted++;
-                    },
-                    data: {
-                      url: "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"
-                    },
-                    dataType: 'jsonp',
-                    error: function(jqXHR, textStatus, errorThrown){
-                      console.error("Error converting to Data URI, " + textStatus);
-                    },
-                    success: function(data, textStatus, jqXHR){
-                        GAME.matches.push(new Match(value.name, data));
-                    }
-                  });
-                  GAME.requestsMade++;
+              $.ajax("http://adamrich.webfactional.com/resolve",
+              {
+                complete: function(jqXHR, textStatus){
+                  GAME.requestsCompleted++;
+                },
+                data: {
+                  url: "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"
+                },
+                dataType: 'jsonp',
+                error: function(jqXHR, textStatus, errorThrown){
+                  console.error("Error resolving URL, " + textStatus);
+                },
+                success: function(data, textStatus, jqXHR){
+                  if(["https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yh/r/C5yt7Cqf3zU.jpg", "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yV/r/Xc3RyXFFu-2.jpg",
+                  "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yo/r/UlIqmHJn-SK.gif",
+                  "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yi/r/odA9sNLrE86.jpg",
+                  "https://fbcdn-profile-a.akamaihd.net/static-ak/rsrc.php/v1/yL/r/HsTZSDw4avx.gif"].indexOf(data) === -1){
+                    $.ajax("http://adamrich.webfactional.com/datauri",
+                    {
+                      complete: function(jqXHR, textStatus){
+                        GAME.requestsCompleted++;
+                      },
+                      data: {
+                        url: "https://graph.facebook.com/" + value.id + "/picture?access_token=" + access_token +"&type=normal"
+                      },
+                      dataType: 'jsonp',
+                      error: function(jqXHR, textStatus, errorThrown){
+                        console.error("Error converting to Data URI, " + textStatus);
+                      },
+                      success: function(data, textStatus, jqXHR){
+                          GAME.matches.push(new Match(value.name, data));
+                      }
+                    });
+                    GAME.requestsMade++;
+                  }
+                  else{
+                    console.log(value.name + " has no Facebook profile picture");
+                  }
                 }
-                else{
-                  console.log(value.name + " has no Facebook profile picture");
-                }
-              }
+              });
+              GAME.requestsMade++;
+              
             });
-            GAME.requestsMade++;
-            
+            waitUntilComplete();//Start the game once all requests are complete
           });
-          waitUntilComplete();//Start the game once all requests are complete
-        });
-      };
+      
       (function() {
         var e = document.createElement('script'); e.async = true;
         e.src = document.location.protocol +

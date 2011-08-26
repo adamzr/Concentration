@@ -81,3 +81,9 @@ AddCharset utf-8 .html .css .js .xml .json .rss .atom
 <IfModule mod_rewrite.c>
   RewriteRule "(^|/)\." - [F]
 </IfModule>
+
+<Files channel.html>
+Header add "Expires" "Mon, 28 Jul 2014 23:30:00 GMT"
+Header add "Cache-Control" "max-age=31536000"
+</Files>
+
