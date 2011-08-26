@@ -168,9 +168,9 @@ function play(){
                         $("#main").html("<div id='winmessage'><h1>You Won in " + seconds + " seconds!</h1><br /><a href='javascript:location.reload()'>Play again?</a></div>");
                         $("#winmessage").center();
                         if(window.location.hash.indexOf("facebook") > 0){
-                          FB.api("/me/scores", 'post', {score: seconds}, function(response){
+                          FB.api("/me/scores", 'post', {score: seconds, access_token: FB.getSession().access_token}, function(response){
                             if (!response || response.error) {
-                              console.error("There was a problem sending the score to FB.")
+                              console.error("There was a problem sending the score to FB.");
                             } else {
                               console.log(response);
                             }
@@ -342,14 +342,6 @@ $(document).ready(function(){
             });
             waitUntilComplete();//Start the game once all requests are complete
           });
-      
-      (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-      }());
-         
     }
     
     //If we got authorization for LinkedIn wait to see if the LinkedIn event handlers will start the game for us
