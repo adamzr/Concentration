@@ -270,7 +270,7 @@
         
         <p class="prepend-11 span-2 append-11 last">Time: <span id="seconds">0</span> seconds</p>
         <p>
-          <audio controls="controls" autoplay="autoplay" loop="loop" id="music" class="prepend-9 span-6 append-9 last">
+          <audio controls="controls" loop="loop" id="music" class="prepend-9 span-6 append-9 last">
             <source src="audio/music.ogg" type="audio/ogg" />
             <source src="audio/music.mp3" type="audio/mpeg" />
           Your browser does not support the audio element.
@@ -289,7 +289,17 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.1.min.js"><\/script>')</script>
 
-
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <script>
+    FB.init({
+      appId  : '234115633277720',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true, // parse XFBML
+      channelUrl : 'http://adamrich.name/Concentration/channel.html' // channel.html file
+    });
+  </script>
+  
   <!-- scripts concatenated and minified via ant build script-->
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>

@@ -47,24 +47,6 @@
         <h1 id="title">Concentration</h1>
     </header>
     <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
-        FB.Event.subscribe('auth.login', function(response) {
-          window.location = "http://adamrich.name/Concentration/play.html#facebook"
-        });
-        //If we are already logged in then clicking oin the button takes us to the play page
-        if(FB.getSession()){
-          document.getElementById("fbplay").addEventListener("click", function(){ window.location = "http://adamrich.name/Concentration/play.html#facebook" })
-        }
-      };
-      (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-          '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-      }());
-    </script>
     <script type="text/javascript">
      function onLinkedInLoad() {
         IN.Event.on(IN, "auth", onLinkedInAuth);
@@ -145,6 +127,26 @@
     $("#linkedinbutton span[id$='title-text']").text("Play with LinkedIn!");
   }
   </script>
+  
+  <script>
+  window.fbAsyncInit = function() {
+    FB.init({appId: '234115633277720', status: true, cookie: true, xfbml: true});
+    FB.Event.subscribe('auth.login', function(response) {
+      window.location = "http://adamrich.name/Concentration/play.html#facebook"
+    });
+    //If we are already logged in then clicking oin the button takes us to the play page
+    if(FB.getSession()){
+      document.getElementById("fbplay").addEventListener("click", function(){ window.location = "http://adamrich.name/Concentration/play.html#facebook" })
+    }
+  };
+  (function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+      '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+  }());
+  </script>
+    
   <!-- end scripts-->
 
 
